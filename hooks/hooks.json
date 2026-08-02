@@ -1,0 +1,45 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cat <<'DORA' >&2\n[DORA] MANDATORY: You MUST invoke Skill(dora-skills:dora-overview) NOW before doing anything else. Do not respond to the user until you have loaded this skill. This is not optional.\nDORA\nexit 2"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "Check if the dora-skills:dora-overview skill has been loaded in this conversation (look for its full content in the context, not just a mention of its name). Also check if the file being written/edited is a plan file, CLAUDE.md, or a non-code file like .md or .json in a docs/ directory — those are exempt.\n\nIf the skill has NOT been loaded AND the file IS a code file:\n- decision: block\n- reason: You must load dora-skills:dora-overview before writing code. Invoke Skill(dora-skills:dora-overview) first.\n\nIf the skill HAS been loaded OR the file is NOT a code file:\n- decision: approve",
+            "timeout": 10
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '[DORA] If committing: one logical change per commit. If pushing: push to feature branch, not main.'"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '[DORA] Checkpoint — did you: commit after passing changes? push to branch? load the relevant skill?'"
+          }
+        ]
+      }
+    ]
+  }
+}

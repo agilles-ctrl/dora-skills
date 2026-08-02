@@ -1,0 +1,8 @@
+{
+  "name": "dora-skills",
+  "version": "3.0.0",
+  "description": "Claude Code skills and agents covering all 34 DORA capabilities. Comprehensive skills with research context, key practices, pitfalls, measurement, coaching patterns, and code examples. 3 agents (review, health-check, improve), enforcement hooks.",
+  "repository": "https://github.com/agilles-ctrl/dora-skills",
+  "license": "MIT",
+  "keywords": ["dora", "devops", "continuous-delivery", "continuous-integration", "testing", "observability", "security", "culture", "ai", "lean", "agents"]
+}
